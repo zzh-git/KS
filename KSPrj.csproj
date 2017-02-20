@@ -1,0 +1,725 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7ED75B79-735E-4A85-A19B-787ED9C0F616}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KSPrj</RootNamespace>
+    <AssemblyName>KSApp</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>公司图标.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="NPOI">
+      <HintPath>..\YHYXYH\bin\Debug\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WinFormControlLibrary1, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\WinFormControlLibrary1.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AlarmReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AlarmReport.Designer.cs">
+      <DependentUpon>AlarmReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Alert.cs" />
+    <Compile Include="ChartBrokenline.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChartBrokenline.Designer.cs">
+      <DependentUpon>ChartBrokenline.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChartCQXZ.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChartCQXZ.Designer.cs">
+      <DependentUpon>ChartCQXZ.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChartParabola.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChartParabola.Designer.cs">
+      <DependentUpon>ChartParabola.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChartPicLine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChartPicLine.Designer.cs">
+      <DependentUpon>ChartPicLine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Cls\LabelTag.cs" />
+    <Compile Include="Cls\MyOpaqueLayer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Cls\TagCalcClass.cs" />
+    <Compile Include="ContactUs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContactUs.Designer.cs">
+      <DependentUpon>ContactUs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FCZFormSix.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FCZFormSix.designer.cs">
+      <DependentUpon>FCZFormSix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FCZForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FCZForm.designer.cs">
+      <DependentUpon>FCZForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmInputPws.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmInputPws.Designer.cs">
+      <DependentUpon>FrmInputPws.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSetTagValue.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSetTagValue.Designer.cs">
+      <DependentUpon>FrmSetTagValue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmShowHis.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmShowHis.Designer.cs">
+      <DependentUpon>FrmShowHis.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmShowHisSelectTag.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmShowHisSelectTag.Designer.cs">
+      <DependentUpon>FrmShowHisSelectTag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmTagCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmTagCheck.Designer.cs">
+      <DependentUpon>FrmTagCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MoreTags.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MoreTags.Designer.cs">
+      <DependentUpon>MoreTags.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Opaquelayer.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="PWDChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PWDChange.Designer.cs">
+      <DependentUpon>PWDChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Test.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Test.Designer.cs">
+      <DependentUpon>Test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tool\AlarmList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tool\AlarmList.Designer.cs">
+      <DependentUpon>AlarmList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tool\ExcelHelper.cs" />
+    <Compile Include="Tool\TagImport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tool\TagImport.Designer.cs">
+      <DependentUpon>TagImport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tool\TagLabelBinding.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tool\TagLabelBinding.Designer.cs">
+      <DependentUpon>TagLabelBinding.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BindTag.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BindTag.Designer.cs">
+      <DependentUpon>BindTag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YCKZ\ValuesConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YCKZ\ValuesConfig.designer.cs">
+      <DependentUpon>ValuesConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YCKZ\YCKZFormSix.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YCKZ\YCKZFormSix.Designer.cs">
+      <DependentUpon>YCKZFormSix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YCKZ\YCKZForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YCKZ\YCKZForm.Designer.cs">
+      <DependentUpon>YCKZForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YXYH\AlarmListYXYH.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YXYH\AlarmListYXYH.Designer.cs">
+      <DependentUpon>AlarmListYXYH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YXYH\AmountOfCoalSaving.cs" />
+    <Compile Include="YXYH\CalCSWDLLSix.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YXYH\CalCSWDLLSix.Designer.cs">
+      <DependentUpon>CalCSWDLLSix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YXYH\CalCSWDLL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YXYH\CalCSWDLL.Designer.cs">
+      <DependentUpon>CalCSWDLL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YXYH\ChartTemperature.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YXYH\ChartTemperature.Designer.cs">
+      <DependentUpon>ChartTemperature.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YXYH\FixedValueEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YXYH\FixedValueEdit.Designer.cs">
+      <DependentUpon>FixedValueEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YXYH\GDLJSR.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YXYH\GDLJSR.Designer.cs">
+      <DependentUpon>GDLJSR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YXYH\GRLJSR.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YXYH\GRLJSR.Designer.cs">
+      <DependentUpon>GRLJSR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YXYH\HistoryLines.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YXYH\HistoryLines.Designer.cs">
+      <DependentUpon>HistoryLines.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YXYH\LabelTag.cs" />
+    <Compile Include="YXYH\LJMLR.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YXYH\LJMLR.Designer.cs">
+      <DependentUpon>LJMLR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YXYH\LJSZMX.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YXYH\LJSZMX.Designer.cs">
+      <DependentUpon>LJSZMX.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YXYH\LogicGraph.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YXYH\LogicGraph.Designer.cs">
+      <DependentUpon>LogicGraph.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YXYH\ResetTotalPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YXYH\ResetTotalPassword.Designer.cs">
+      <DependentUpon>ResetTotalPassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YXYH\RLZCFY.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YXYH\RLZCFY.Designer.cs">
+      <DependentUpon>RLZCFY.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YXYH\RunOptimizePromptSix.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YXYH\RunOptimizePromptSix.Designer.cs">
+      <DependentUpon>RunOptimizePromptSix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YXYH\RunOptimizePrompt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YXYH\RunOptimizePrompt.Designer.cs">
+      <DependentUpon>RunOptimizePrompt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YXYH\SelectTag.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YXYH\SelectTag.Designer.cs">
+      <DependentUpon>SelectTag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YXYH\SelectTagDate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YXYH\SelectTagDate.Designer.cs">
+      <DependentUpon>SelectTagDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YXYH\SSCSSix.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YXYH\SSCSSix.Designer.cs">
+      <DependentUpon>SSCSSix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YXYH\SSCS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YXYH\SSCS.Designer.cs">
+      <DependentUpon>SSCS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YXYH\SystemGraphSix.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YXYH\SystemGraphSix.Designer.cs">
+      <DependentUpon>SystemGraphSix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YXYH\SystemGraph.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YXYH\SystemGraph.Designer.cs">
+      <DependentUpon>SystemGraph.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YXYH\TagReplace.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YXYH\TagReplace.Designer.cs">
+      <DependentUpon>TagReplace.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YXYH\YXYHMainSix.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YXYH\YXYHMainSix.Designer.cs">
+      <DependentUpon>YXYHMainSix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YXYH\YXYHMain3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YXYH\YXYHMain3.Designer.cs">
+      <DependentUpon>YXYHMain3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YXYH\HistoryArea.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YXYH\HistoryArea.Designer.cs">
+      <DependentUpon>HistoryArea.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YXYH\LJJML.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YXYH\LJJML.Designer.cs">
+      <DependentUpon>LJJML.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YXYH\LJJSFY.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YXYH\LJJSFY.Designer.cs">
+      <DependentUpon>LJJSFY.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YXYH\ResetTotalAvg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YXYH\ResetTotalAvg.Designer.cs">
+      <DependentUpon>ResetTotalAvg.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AlarmReport.resx">
+      <DependentUpon>AlarmReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChartBrokenline.resx">
+      <DependentUpon>ChartBrokenline.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChartCQXZ.resx">
+      <DependentUpon>ChartCQXZ.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChartParabola.resx">
+      <DependentUpon>ChartParabola.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChartPicLine.resx">
+      <DependentUpon>ChartPicLine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContactUs.resx">
+      <DependentUpon>ContactUs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FCZFormSix.resx">
+      <DependentUpon>FCZFormSix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FCZForm.resx">
+      <DependentUpon>FCZForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmInputPws.resx">
+      <DependentUpon>FrmInputPws.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSetTagValue.resx">
+      <DependentUpon>FrmSetTagValue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmShowHis.resx">
+      <DependentUpon>FrmShowHis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmShowHisSelectTag.resx">
+      <DependentUpon>FrmShowHisSelectTag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmTagCheck.resx">
+      <DependentUpon>FrmTagCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MoreTags.resx">
+      <DependentUpon>MoreTags.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PWDChange.resx">
+      <DependentUpon>PWDChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Test.resx">
+      <DependentUpon>Test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tool\AlarmList.resx">
+      <DependentUpon>AlarmList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tool\TagImport.resx">
+      <DependentUpon>TagImport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tool\TagLabelBinding.resx">
+      <DependentUpon>TagLabelBinding.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BindTag.resx">
+      <DependentUpon>BindTag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YCKZ\ValuesConfig.resx">
+      <DependentUpon>ValuesConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YCKZ\YCKZFormSix.resx">
+      <DependentUpon>YCKZFormSix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YCKZ\YCKZForm.resx">
+      <DependentUpon>YCKZForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YXYH\AlarmListYXYH.resx">
+      <DependentUpon>AlarmListYXYH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YXYH\CalCSWDLLSix.resx">
+      <DependentUpon>CalCSWDLLSix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YXYH\CalCSWDLL.resx">
+      <DependentUpon>CalCSWDLL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YXYH\ChartTemperature.resx">
+      <DependentUpon>ChartTemperature.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YXYH\FixedValueEdit.resx">
+      <DependentUpon>FixedValueEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YXYH\GDLJSR.resx">
+      <DependentUpon>GDLJSR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YXYH\GRLJSR.resx">
+      <DependentUpon>GRLJSR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YXYH\HistoryLines.resx">
+      <DependentUpon>HistoryLines.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YXYH\LJMLR.resx">
+      <DependentUpon>LJMLR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YXYH\LJSZMX.resx">
+      <DependentUpon>LJSZMX.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YXYH\LogicGraph.resx">
+      <DependentUpon>LogicGraph.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YXYH\ResetTotalPassword.resx">
+      <DependentUpon>ResetTotalPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YXYH\RLZCFY.resx">
+      <DependentUpon>RLZCFY.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YXYH\RunOptimizePromptSix.resx">
+      <DependentUpon>RunOptimizePromptSix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YXYH\RunOptimizePrompt.resx">
+      <DependentUpon>RunOptimizePrompt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YXYH\SelectTag.resx">
+      <DependentUpon>SelectTag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YXYH\SelectTagDate.resx">
+      <DependentUpon>SelectTagDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YXYH\SSCSSix.resx">
+      <DependentUpon>SSCSSix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YXYH\SSCS.resx">
+      <DependentUpon>SSCS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YXYH\SystemGraphSix.resx">
+      <DependentUpon>SystemGraphSix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YXYH\SystemGraph.resx">
+      <DependentUpon>SystemGraph.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YXYH\TagReplace.resx">
+      <DependentUpon>TagReplace.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YXYH\YXYHMainSix.resx">
+      <DependentUpon>YXYHMainSix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YXYH\YXYHMain3.resx">
+      <DependentUpon>YXYHMain3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YXYH\HistoryArea.resx">
+      <DependentUpon>HistoryArea.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YXYH\LJJML.resx">
+      <DependentUpon>LJJML.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YXYH\LJJSFY.resx">
+      <DependentUpon>LJJSFY.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YXYH\ResetTotalAvg.resx">
+      <DependentUpon>ResetTotalAvg.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="bin\Debug\fcz.opc" />
+    <None Include="ClassDiagram1.cd" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="Tool\vssver2.scc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\backImg.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\oc.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\Alert.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\Real.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\welcome.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\退出bg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\监控bg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\报警bg-over.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\报警bg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\btnlogin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\quit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\arrowD.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\SystemInfo1.txt" />
+    <Content Include="bin\Debug\SystemInfo2.txt" />
+    <None Include="images\系统图.png" />
+    <None Include="images\系统图.jpg" />
+    <None Include="images\yckz-top.jpg" />
+    <None Include="images\red.png" />
+    <None Include="images\green.png" />
+    <None Include="images\horizontalGreen.png" />
+    <None Include="images\horizontalRed.png" />
+    <None Include="images\verticalGreen.png" />
+    <None Include="images\verticalRed.png" />
+    <None Include="Resources\bg.png" />
+    <None Include="Resources\lv.png" />
+    <None Include="Resources\lv1.png" />
+    <None Include="images\右下图.jpg" />
+    <None Include="images\系统图5.jpg" />
+    <None Include="images\系统图6.jpg" />
+    <None Include="images\#5系统图.jpg" />
+    <None Include="images\#6系统图.jpg" />
+    <Content Include="公司图标.ico" />
+    <None Include="Resources\0002.png" />
+    <None Include="images\tab.jpg" />
+    <None Include="images\bgletop.jpg" />
+    <None Include="images\bgrtop.jpg" />
+    <None Include="images\bgrnav.jpg" />
+    <None Include="images\bgletbot.jpg" />
+    <None Include="images\bgletnav.jpg" />
+    <None Include="images\0001.png" />
+    <None Include="images\bgrbot.jpg" />
+    <None Include="images\btnbg.jpg" />
+    <Content Include="images\buttonbg.jpg" />
+    <Content Include="images\Frm1.jpg" />
+    <Content Include="images\login.jpg" />
+    <Content Include="images\logo.png" />
+    <None Include="images\topbg.jpg" />
+    <None Include="Resources\001-2-3.jpg" />
+    <None Include="images\001-2-3.jpg" />
+    <Content Include="bin\Debug\1262.wav" />
+    <Content Include="bin\Debug\f001.png" />
+    <Content Include="bin\Debug\f0011.png" />
+    <Content Include="bin\Debug\f002.png" />
+    <Content Include="bin\Debug\orange.png" />
+    <Content Include="bin\Debug\red.png" />
+    <Content Include="bin\Debug\WASPCN.dll" />
+    <Content Include="bin\Debug\yellow.png" />
+    <Content Include="bin\Debug\YFOPCSDK.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HAOCommon\HAOCommon.csproj">
+      <Project>{5173eb7c-03f8-4a8d-915a-e76dba29edc5}</Project>
+      <Name>HAOCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WinHost\WinHost.csproj">
+      <Project>{e853b3fb-4dd4-42ff-9fe0-ab5b236c4f31}</Project>
+      <Name>WinHost</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

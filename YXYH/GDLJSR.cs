@@ -1,0 +1,261 @@
+﻿using HAOCommon;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using WinHost;
+
+namespace YHYXYH.YXYH
+{
+    public partial class GDLJSR : Form
+    {
+        ////这里注释掉的都要看一遍 ZZH 2016-9-17 
+        int UnitNO = 5;
+        public GDLJSR(int unitNo)
+        {
+            InitializeComponent();
+            this.UnitNO = unitNo;
+            if (UnitNO == 5)
+            {
+                F6 = "F6";
+                F3226 = "F3226";
+            }
+            else if (UnitNO == 6)
+            {
+                F6 = "F106";
+                F3226 = "F4226";
+            }
+        }
+
+        string F6, F3226;
+
+        long lTotalCount = -1;
+        double dHourOfYear = 0;
+        double dXMin = 0;
+        /// <summary>
+        /// 上网电价
+        /// </summary>
+        DataTable dtChart = null;
+        private void GDLJSR_Load(object sender, EventArgs e)
+        {
+            chart1.Series[0].XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
+            chart1.Series[0].XValueMember = "HourOfYear";
+            chart1.Series[0].YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
+            chart1.Series[0].YValueMembers = F6;
+            chart1.ChartAreas[0].AxisY.LabelStyle.Format = "0.##";
+            timerChartBind.Interval = 1000;// ConstYXYH.RefIntvel;
+            timerChartBind.Enabled = true;
+            dtChart = TagLJValue.GetTotalDataWithNewTable(UnitNO);
+            if (dtChart.Rows.Count > 0)
+            {
+                dateTimePickerBegin1.Value = DateTime.Parse(dtChart.Rows[0]["ValueTime"].ToString());
+                dateTimePickerBegin2.Value = dateTimePickerBegin1.Value;
+            }
+            timerChartBind_Tick(null, null);
+        }
+
+        private void timerChartBind_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                DataRow row;
+                if (lTotalCount < TagLJValue.GetTotalCount(UnitNO))
+                {
+                    lTotalCount = TagLJValue.GetTotalCount(UnitNO);
+                    dtChart.Dispose();
+                    dtChart = null;
+                    dtChart = TagLJValue.GetTotalDataWithNewTable(UnitNO);
+                    if (dtChart.Rows.Count > 0)
+                    {
+                        dHourOfYear = double.Parse(dtChart.Rows[dtChart.Rows.Count - 1]["HourOfYear"].ToString());
+                        if (rdoTotalHours.Checked == true)
+                        {
+                            chart1.Series[0].XValueMember = "HourOfYear";
+                            chart1.Series[0].XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
+                            dXMin = double.Parse(dtChart.Rows[0]["HourOfYear"].ToString());
+                            chart1.ChartAreas[0].AxisX.MajorGrid.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Auto;
+                            chart1.ChartAreas[0].AxisX.MajorGrid.Interval = (int)(dHourOfYear - dXMin) / 10;
+                            chart1.ChartAreas[0].AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Auto;
+                            chart1.ChartAreas[0].AxisX.Interval = (int)(dHourOfYear - dXMin) / 10;
+                            chart1.ChartAreas[0].AxisX.Title = "供热期累计小时数";
+                            chart1.ChartAreas[0].AxisX.LabelStyle.Format = "0";
+                        }
+                        else
+                        {
+                            DateTime timeBegin = (DateTime)dtChart.Rows[0]["ValueTime"];
+                            DateTime timeEnd = (DateTime)dtChart.Rows[dtChart.Rows.Count - 1]["ValueTime"];
+                            chart1.Series[0].XValueMember = "ValueTime";
+                            chart1.Series[0].XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
+                            chart1.ChartAreas[0].AxisX.MajorGrid.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Hours;
+                            chart1.ChartAreas[0].AxisX.MajorGrid.Interval = (int)(timeEnd - timeBegin).TotalHours / 6;
+                            chart1.ChartAreas[0].AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Hours;
+                            chart1.ChartAreas[0].AxisX.Interval = (int)(timeEnd - timeBegin).TotalHours / 6;
+                            chart1.ChartAreas[0].AxisX.Title = "时间";
+                            chart1.ChartAreas[0].AxisX.LabelStyle.Format = "yyyy-MM-dd HH:mm";
+                        }
+                        chart1.ChartAreas[0].AxisY.Title = "供电累计收入：" + Math.Round(double.Parse(dtChart.Rows[dtChart.Rows.Count - 1][F6].ToString()), 2) + "（万元）";
+                        row = dtChart.NewRow();
+                        row["ValueTime"] = DateTime.Parse(dtChart.Rows[dtChart.Rows.Count - 1]["ValueTime"].ToString()).AddSeconds(1);
+                        row["HourOfYear"] = dHourOfYear + 0.0001;
+                        dtChart.Rows.Add(row);
+                    }
+                }
+                row = dtChart.NewRow();
+                row["ValueTime"] = DateTime.Now;
+                dHourOfYear += timerChartBind.Interval / 1000 / 3600d;
+                row["HourOfYear"] = dHourOfYear;
+                MinMaxValue mmv = TagLJValue.GetMinMaxValue(F3226, UnitNO);
+                chart1.ChartAreas[0].AxisX.Title = "供热期累计小时数：" + Math.Round(dHourOfYear, 4).ToString("0.0000")
+                    + "                累计开始时间：" + mmv.BeginDateString + "\n供电收入最小值："
+                    + Math.Round(mmv.MinValue / 10000, 4).ToString("0.0000") + "        供电收入最小值时间：" + mmv.MinDateString
+                    + "\n供电收入最大值：" + Math.Round(mmv.MaxValue / 10000, 4).ToString("0.0000") + "        供电收入最大值时间："
+                    + mmv.MaxDateString + "\n供电收入平均值：" + TagLJValue.GetTotalDataAvg(F6, UnitNO) + "万元/小时";
+                chart1.ChartAreas[0].AxisX.TitleAlignment = StringAlignment.Near;
+                dtChart.Rows.Add(row);
+                chart1.DataSource = dtChart;
+                chart1.DataBind();
+                WriteLog.WriteLogs("timerChartBind:"+timerChartBind.Enabled);
+            }
+            catch (Exception ex)
+            { WriteLog.WriteLogs(ex.ToString()); }
+        }
+
+        private void dateTimePickerBegin1_ValueChanged(object sender, EventArgs e)
+        {
+            dateTimePickerBegin2.Value = DateTime.Parse(dateTimePickerBegin1.Value.ToString("yyyy-MM-dd") + " "
+                + dateTimePickerBegin2.Value.ToString("HH:mm:ss"));
+        }
+
+        private void dateTimePickerEnd1_ValueChanged(object sender, EventArgs e)
+        {
+            dateTimePickerEnd2.Value = DateTime.Parse(dateTimePickerEnd1.Value.ToString("yyyy-MM-dd") + " "
+                + dateTimePickerEnd2.Value.ToString("HH:mm:ss"));
+        }
+
+        private void btnQuery_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                lblQueryWait.Visible = true;
+                lblQueryWait.Refresh();
+                string sTime = PublicFunction.DateTimeToStringWithfff(DateTime.Now);
+                string sSql = "insert into QueryAlarm(QueryDate,StartTime,EndTime,QueryFields,UnitNO,AlarmDesc) values('"
+                    + sTime + "','" + dateTimePickerBegin2.Value + "','" + dateTimePickerEnd2.Value + "','" + F6 + "',"
+                    + UnitNO + ",'查询数据时，未按提示等待，做其他操作造成程序退出！')";
+                try { SQLHelper.ExecuteSql(sSql); }
+                catch { }
+
+                dtChart = TagLJValue.QueryDBTotalData(dateTimePickerBegin2.Value, dateTimePickerEnd2.Value, "[ValueTime],[HourOfYear]," + F6, UnitNO);
+                if (dtChart.Rows.Count > 0)
+                {
+                    chart1.ChartAreas[0].AxisY.Title = "供电累计收入：" + Math.Round(double.Parse(dtChart.Rows[dtChart.Rows.Count - 1][F6].ToString()), 2) + "（万元）";
+                    if (rdoTotalHours.Checked == true)
+                    {
+                        chart1.Series[0].XValueMember = "HourOfYear";
+                        chart1.Series[0].XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
+                        dXMin = double.Parse(dtChart.Rows[0]["HourOfYear"].ToString());
+                        dHourOfYear = double.Parse(dtChart.Rows[dtChart.Rows.Count - 1]["HourOfYear"].ToString());
+                        chart1.ChartAreas[0].AxisX.MajorGrid.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Auto;
+                        chart1.ChartAreas[0].AxisX.MajorGrid.Interval = (int)(dHourOfYear - dXMin) / 10;
+                        chart1.ChartAreas[0].AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Auto;
+                        chart1.ChartAreas[0].AxisX.Interval = (int)(dHourOfYear - dXMin) / 10;
+                        chart1.ChartAreas[0].AxisX.Title = "供热期累计小时数";
+                        chart1.ChartAreas[0].AxisX.LabelStyle.Format = "0";
+                    }
+                    else
+                    {
+                        DateTime timeBegin = (DateTime)dtChart.Rows[0]["ValueTime"];
+                        DateTime timeEnd = (DateTime)dtChart.Rows[dtChart.Rows.Count - 1]["ValueTime"];
+                        chart1.Series[0].XValueMember = "ValueTime";
+                        chart1.Series[0].XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
+                        chart1.ChartAreas[0].AxisX.MajorGrid.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Hours;
+                        chart1.ChartAreas[0].AxisX.MajorGrid.Interval = (int)(timeEnd - timeBegin).TotalHours / 6;
+                        chart1.ChartAreas[0].AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Hours;
+                        chart1.ChartAreas[0].AxisX.Interval = (int)(timeEnd - timeBegin).TotalHours / 6;
+                        chart1.ChartAreas[0].AxisX.Title = "日期时间";
+                        chart1.ChartAreas[0].AxisX.LabelStyle.Format = "yyyy-MM-dd HH:mm";
+                    }
+                    chart1.ChartAreas[0].AxisX.TitleAlignment = StringAlignment.Far;
+                    chart1.DataSource = dtChart;
+                    chart1.DataBind();
+                    timerChartBind.Enabled = false;
+                }
+                else
+                    MessageBox.Show("没有查询到数据！");
+
+                sSql = "delete QueryAlarm where QueryDate='" + sTime + "'";
+                try { SQLHelper.ExecuteSql(sSql); }
+                catch { }
+            }
+            catch (Exception ex)
+            {
+                WriteLog.WriteLogs(ex.ToString());
+                MessageBox.Show("错误：" + ex.Message);
+            }
+            finally
+            {
+                lblQueryWait.Visible = false;
+                lblQueryWait.Refresh();
+            }
+        }
+
+        private void btnRealTime_Click(object sender, EventArgs e)
+        {
+            lTotalCount = TagLJValue.GetTotalCount(UnitNO) - 1;
+            timerChartBind_Tick(null, null);
+            timerChartBind.Enabled = true;
+        }
+
+        private void GDLJSR_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            dtChart.Dispose();
+            dtChart = null;
+            this.Dispose(true);
+        }
+
+        //导出 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DataTable dt = dtChart.DefaultView.ToTable(false, new string[] { "ValueTime", F6, "hourOfYear" });
+            string title = chart1.ChartAreas[0].AxisX.Title;
+            dt.Columns[0].ColumnName = "时间";
+            dt.Columns[1].ColumnName = "供电累计收入";
+            dt.Columns[2].ColumnName = "小时数";
+            bool b = NPOIExcelHelper.DataTableToExcel(dt, title, "供电累计收入");
+            if (b)
+                MessageBox.Show("导出成功");
+        }
+
+        private void rdoTotalHours_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdoTotalHours.Checked)
+            {
+                if (timerChartBind.Enabled == true)
+                {
+                    lTotalCount = TagLJValue.GetTotalCount(UnitNO) - 1;
+                    timerChartBind_Tick(null, null);
+                }
+                else
+                    btnQuery_Click(null, null);
+            }
+        }
+
+        private void rdoDataTime_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdoDataTime.Checked)
+            {
+                if (timerChartBind.Enabled == true)
+                {
+                    lTotalCount = TagLJValue.GetTotalCount(UnitNO) - 1;
+                    timerChartBind_Tick(null, null);
+                }
+                else
+                    btnQuery_Click(null, null);
+            }
+        }
+    }
+}
