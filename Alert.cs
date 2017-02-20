@@ -10,6 +10,7 @@ namespace KSPrj
         public static extern bool Beep(int frequency, int duration);
         */
 
+
         /*[DllImport("winmm.dll",EntryPoint="PlaySound")]
         private static extern bool PlaySound(string pszSound,IntPtr hmod,uint fdwSound);
         public static void gosound()
